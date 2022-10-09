@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+import glob
+import os
+import shutil
 import pandas as pd
 import fastparquet
-import glob
-import os, shutil
 
 from download_all import FILTERS
 
@@ -21,6 +23,6 @@ if __name__ == "__main__":
             df = pd.read_csv(f'raw_data/{year}_{filter}.csv', names=["timestamp", "production"])
             df["year"] = year
             df["filter"] = filter
-            df.to_parquet(f'parquet_partitioned/all_data.parquet', partition_cols=["year", "filter"])
+            df.to_parquet('parquet_partitioned/all_data.parquet', partition_cols=["year", "filter"])
 
     fastparquet.writer.merge(glob.glob("parquet_partitioned/all_data.parquet/year=*/filter=*/*.parquet"))

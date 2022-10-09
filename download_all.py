@@ -1,6 +1,9 @@
-import requests
+#!/usr/bin/env python3
 from datetime import datetime
-import shutil, os
+import shutil
+import os
+import requests
+from joblib import Parallel, delayed
 
 
 FILTERS = {
@@ -44,6 +47,22 @@ def get_data(filter, timestamp):
     return data.json()["series"]
 
 
+def download(filter):
+    file_handles = {}
+
+    timestamps = get_timestamps(filter)
+    for timestamp in timestamps:
+        data = get_data(filter, timestamp)
+        for time_in_nanoseconds, power in data:
+            year = datetime.fromtimestamp(time_in_nanoseconds/1000.).year
+            path = f"raw_data/{year}_{filter}.csv"
+            if path not in file_handles:
+                file_handles[path] = open(path, "a")
+            file_handles[path].write(f"{time_in_nanoseconds},{power}\n")
+
+    for handle in file_handles.values():
+        handle.close()
+
 if __name__ == "__main__":
     dir = 'raw_data/'
     if os.path.isdir(dir):
@@ -51,11 +70,4 @@ if __name__ == "__main__":
 
     os.makedirs(dir)
 
-    for filter in FILTERS.keys():
-        timestamps = get_timestamps(filter)
-        for timestamp in timestamps:
-            data = get_data(filter, timestamp)
-            for d in data:
-                year = datetime.fromtimestamp(d[0]/1000.).year
-                with open(f"raw_data/{year}_{filter}.csv", "a") as f:
-                    f.write(f"{d[0]},{d[1]}\n")
+    Parallel(n_jobs=20)(delayed(download)(filter) for filter in FILTERS.keys())
