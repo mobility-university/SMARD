@@ -1,0 +1,17 @@
+FILTERS = {
+    "1223": "Stromerzeugung: Braunkohle",
+    "1224": "Stromerzeugung: Kernenergie",
+    "1225": "Stromerzeugung: Wind Offshore",
+    "1226": "Stromerzeugung: Wasserkraft",
+    "1227": "Stromerzeugung: Sonstige Konventionelle",
+    "1228": "Stromerzeugung: Sonstige Erneuerbare",
+    "4066": "Stromerzeugung: Biomasse",
+    "4067": "Stromerzeugung: Wind Onshore",
+    "4068": "Stromerzeugung: Photovoltaik",
+    "4069": "Stromerzeugung: Steinkohle",
+    "4070": "Stromerzeugung: Pumpspeicher",
+    "4071": "Stromerzeugung: Erdgas",
+    "410": "Stromverbrauch: Gesamt (Netzlast)",
+    "4359": "Stromverbrauch: Residuallast",
+    "4387": "Stromverbrauch: Pumpspeicher",
+}
