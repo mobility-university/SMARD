@@ -15,7 +15,7 @@ SMARD API: https://smard.api.bund.dev
 
 ## Download data and store as parquet
 
-Run `python download_all.py` to download data and `python merge_parquet.py` or `python merge_parquet_partitioned.py` to merge the data into one parquet-file. The latter will create a partitioned parquet file (which is at the moment not supported by DuckDB but it is supported by Spark).
+Run `./download_all.py` to download data and `./merge_parquet.py` or `./merge_parquet_partitioned.py` to merge the data into one parquet-file. The latter will create a partitioned parquet file (which is at the moment not supported by DuckDB but it is supported by Spark).
 
 ## Analysis with Spark
 

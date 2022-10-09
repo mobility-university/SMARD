@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+import glob
+import os
+import shutil
 import pandas as pd
 import fastparquet
-import glob
-import os, shutil
 
 from download_all import FILTERS
 
@@ -14,7 +16,7 @@ if __name__ == "__main__":
     if os.path.isdir(dir):
         shutil.rmtree(dir)
 
-    os.makedirs(dir+"all_data.parquet/")
+    os.makedirs(f"{dir}all_data.parquet/")
 
     for year in years:
         for filter in FILTERS.keys():
